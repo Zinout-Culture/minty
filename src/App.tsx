@@ -24,6 +24,7 @@ function App() {
         </p>
       </div>
       <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
+      <a className="text-3xl font-bold underline bg-red-500">Otro boton</a>
     </>
   )
 }
