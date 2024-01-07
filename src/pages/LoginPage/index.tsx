@@ -44,6 +44,7 @@ const LoginPage = () => {
           className="w-full focus:outline-none px-2 text-sm"
           onChange={formik.handleChange}
           value={formik.values.email}
+          data-testid="email"
         />
         <div className="bg-green-500 rounded p-2">
           <img src={mailIcon} className="w-8 h-8 !fill-slate-50 !stroke-slate-50 !text-slate-50" />
@@ -69,6 +70,7 @@ const LoginPage = () => {
           className="w-full focus:outline-none px-2 text-sm"
           onChange={formik.handleChange}
           value={formik.values.password}
+          data-testid="password"
         />
         <div className="bg-green-500 rounded p-2" onClick={(_) => setVisible(!isVisible)}>
           <img
@@ -136,7 +138,7 @@ const LoginPage = () => {
   )
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen" data-testid="LoginPage">
       <div className="w-full flex justify-center items-center">
         <div className="w-10/12">
           {header}
