@@ -1,6 +1,4 @@
-interface Props {}
-
-const HomePage = (props: Props) => {
+const HomePage = () => {
   return <>Hme PAge</>
 }
 

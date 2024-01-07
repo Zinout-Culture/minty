@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useFormik } from 'formik'
+import * as Yup from 'yup'
 
 import mailIcon from '../../assets/mail.svg'
 import lockIcon from '../../assets/lock.svg'
@@ -6,55 +8,79 @@ import unlockIcon from '../../assets/unlock.svg'
 
 import logo from '/logo.png'
 
-interface Props {}
+interface ILogin {
+  email: string
+  password: string
+}
 
-const LoginPage = (props: Props) => {
+const LoginSchema = Yup.object().shape({
+  email: Yup.string().email('¡Correo inválido!').required('¡Campo requerido!'),
+  password: Yup.string().min(2, '¡Muy corto!').max(50, 'Muy largo!').required('¡Campo requerido!'),
+})
+
+const LoginPage = () => {
   const [isVisible, setVisible] = useState<boolean>(false)
+  const formik = useFormik<ILogin>({
+    initialValues: { email: '', password: '' },
+    validationSchema: LoginSchema,
+    onSubmit: (values: ILogin) => {
+      console.log('---values--')
+      console.log(values)
+    },
+  })
 
-  const inputText = (label: string, name: string, icon: string) => {
-    return (
-      <div className="flex flex-col items-start">
-        <label htmlFor="email">{label}</label>
+  const InputEmail = (
+    <div className="flex flex-col items-start">
+      <label htmlFor="email">Correo Electr&oacute;nico</label>
 
-        <div className="flex bg-slate-900 justify-between w-full">
-          <input
-            type="text"
-            id={name}
-            name={name}
-            placeholder={label}
-            className="w-full focus:outline-none px-2 text-sm"
-          />
-          <div className="bg-green-500 rounded p-2">
-            <img src={icon} className="w-8 h-8 !fill-slate-50 !stroke-slate-50 !text-slate-50" />
-          </div>
+      <div className="flex bg-slate-900 justify-between w-full">
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="user@domain.com"
+          className="w-full focus:outline-none px-2 text-sm"
+          onChange={formik.handleChange}
+          value={formik.values.email}
+        />
+        <div className="bg-green-500 rounded p-2">
+          <img src={mailIcon} className="w-8 h-8 !fill-slate-50 !stroke-slate-50 !text-slate-50" />
         </div>
       </div>
-    )
-  }
 
-  const inputPassword = (label: string, name: string) => {
-    return (
-      <div className="flex flex-col items-start">
-        <label htmlFor="email">{label}</label>
+      {Boolean(formik.errors.email && formik.touched.email) && (
+        <span className="text-xs text-red-500">{formik.errors.email}</span>
+      )}
+    </div>
+  )
 
-        <div className="flex bg-slate-900 justify-between w-full">
-          <input
-            type={isVisible ? 'text' : 'password'}
-            id={name}
-            name={name}
-            placeholder={label}
-            className="w-full focus:outline-none px-2 text-sm"
+  const InputPassword = (
+    <div className="flex flex-col items-start">
+      <label htmlFor="password">Contrase&ntilde;a</label>
+
+      <div className="flex bg-slate-900 justify-between w-full">
+        <input
+          type={isVisible ? 'text' : 'password'}
+          id="password"
+          name="password"
+          placeholder="Contraseña"
+          className="w-full focus:outline-none px-2 text-sm"
+          onChange={formik.handleChange}
+          value={formik.values.password}
+        />
+        <div className="bg-green-500 rounded p-2" onClick={(_) => setVisible(!isVisible)}>
+          <img
+            src={isVisible ? unlockIcon : lockIcon}
+            className="w-8 h-8 !fill-slate-50 !stroke-slate-50 !text-slate-50"
           />
-          <div className="bg-green-500 rounded p-2" onClick={(_) => setVisible(!isVisible)}>
-            <img
-              src={isVisible ? unlockIcon : lockIcon}
-              className="w-8 h-8 !fill-slate-50 !stroke-slate-50 !text-slate-50"
-            />
-          </div>
         </div>
       </div>
-    )
-  }
+
+      {Boolean(formik.errors.password && formik.touched.password) && (
+        <span className="text-xs text-red-500">{formik.errors.password}</span>
+      )}
+    </div>
+  )
 
   const separator = (text: string) => {
     return (
@@ -75,9 +101,9 @@ const LoginPage = (props: Props) => {
   )
 
   const form = (
-    <form className="flex flex-col py-8">
-      {inputText('Correo electrónico', 'email', mailIcon)}
-      {inputPassword('Contraseña', 'password')}
+    <form className="flex flex-col py-8" onSubmit={formik.handleSubmit}>
+      {InputEmail}
+      {InputPassword}
 
       <div className="flex justify-end py-4">
         <a href="#" className="underline text-sm">
@@ -85,13 +111,23 @@ const LoginPage = (props: Props) => {
         </a>
       </div>
 
-      <button className="bg-green-500 border-2 border-green-500 rounded-md h-10 font-bold">
+      <button
+        type="submit"
+        className={
+          formik.isValid
+            ? 'bg-green-500 border-2 border-green-500 rounded-md h-10 font-bold'
+            : 'bg-gray-500 border-2 border-gray-500 rounded-md h-10 font-bold'
+        }
+      >
         Ingresar
       </button>
 
       {separator('ó')}
 
-      <button className="border-2 border-green-500 text-green-500 rounded-md h-10 font-bold">
+      <button
+        type="button"
+        className="border-2 border-green-500 text-green-500 rounded-md h-10 font-bold"
+      >
         Registrarse
       </button>
     </form>
