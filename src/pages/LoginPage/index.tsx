@@ -84,7 +84,7 @@ const LoginPage = () => {
 
   const separator = (text: string) => {
     return (
-      <div className="flex w-full justify-between items-center">
+      <div className="flex w-full justify-between items-center py-2">
         <hr className="w-2/5" />
         <span>{text}</span>
         <hr className="w-2/5" />
