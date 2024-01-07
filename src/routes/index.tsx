@@ -7,11 +7,12 @@ import HomePage from '../pages/HomePage'
 const router = createBrowserRouter([
   {
     path: '/',
+    element: <LoginPage />,
+  },
+  {
+    path: '/session',
     element: <App />,
-    children: [
-      { path: 'login', element: <LoginPage /> },
-      { path: 'home', element: <HomePage /> },
-    ],
+    children: [{ path: '', element: <HomePage /> }],
   },
 ])
 
