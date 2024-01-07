@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useNavigate } from 'react-router'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 
@@ -19,13 +20,14 @@ const LoginSchema = Yup.object().shape({
 })
 
 const LoginPage = () => {
+  const navigate = useNavigate()
   const [isVisible, setVisible] = useState<boolean>(false)
   const formik = useFormik<ILogin>({
     initialValues: { email: '', password: '' },
     validationSchema: LoginSchema,
     onSubmit: (values: ILogin) => {
-      console.log('---values--')
-      console.log(values)
+      console.table(values)
+      navigate('/session')
     },
   })
 
