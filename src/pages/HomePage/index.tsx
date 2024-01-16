@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react'
 import Functions from '../../helpers/functions'
 
 import userIcon from '../../assets/user.svg'
+import searchIcon from '../../assets/search.svg'
+
 import mockData from '../../mocks/data.json'
 
 interface IData {
@@ -28,7 +30,17 @@ const HomePage = () => {
   }, [])
 
   return (
-    <div data-testid="HomePage" className="p-6">
+    <div data-testid="HomePage" className="px-6 flex flex-col">
+      <div className="flex gap-2 w-full py-2">
+        <input className="bg-white rounded p-2 text-neutral-800 text-sm w-full focus:outline-none" />
+        <div
+          className="bg-green-500 rounded flex justify-center items-center"
+          style={{ width: 50 }}
+        >
+          <img src={searchIcon} width={30} height={30} />
+        </div>
+      </div>
+
       {data.map((item: IData, index: number) => (
         <div
           key={index}

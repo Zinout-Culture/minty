@@ -2,7 +2,7 @@ import menuIcon from '../../assets/menu.svg'
 
 const Menu = () => {
   return (
-    <div className="w-full flex justify-between p-6">
+    <div className="w-full flex justify-between px-6 pt-6 pb-4">
       <div className="flex items-center">
         <span>Minty</span>
       </div>
