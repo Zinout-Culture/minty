@@ -122,6 +122,7 @@ const LoginPage = () => {
             ? 'bg-green-500 border-2 border-green-500 rounded-md h-10 font-bold'
             : 'bg-gray-500 border-2 border-gray-500 rounded-md h-10 font-bold'
         }
+        data-testid="btn-login"
       >
         Ingresar
       </button>
@@ -131,6 +132,7 @@ const LoginPage = () => {
       <button
         type="button"
         className="border-2 border-green-500 text-green-500 rounded-md h-10 font-bold"
+        data-testid="btn-register"
       >
         Registrarse
       </button>

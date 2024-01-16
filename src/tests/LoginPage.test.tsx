@@ -25,6 +25,8 @@ describe('Login Page', () => {
     fireEvent.click(screen.getByText('Ingresar'))
     expect(emailInput.value).toBe('jhon@doe.com')
     expect(passwordInput.value).toBe('Lima2023.')
+    // const loginBtn = screen.getByTestId('btn-login')
+    // expect(loginBtn.classList.contains('bg-green-500 border-green-500')).toBe(true)
     // expect(screen.getByTestId('HomePage')).toBeDefined()
   })
 
