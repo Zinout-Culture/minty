@@ -4,6 +4,8 @@ import Functions from '../../helpers/functions'
 
 import userIcon from '../../assets/user.svg'
 import searchIcon from '../../assets/search.svg'
+import editIcon from '../../assets/edit.svg'
+import infoIcon from '../../assets/info.svg'
 
 import mockData from '../../mocks/data.json'
 
@@ -60,7 +62,7 @@ const HomePage = () => {
           </div>
 
           {item.isOpen && (
-            <div className="p-4 flex flex-col items-start">
+            <div className="pl-4 pr-4 pt-4 flex flex-col items-start">
               <div className="flex justify-between w-1/2">
                 <span className="text-sm font-bold">Nota:</span>
                 <span className="text-sm">{item.score}</span>
@@ -68,6 +70,10 @@ const HomePage = () => {
               <div className="flex flex-col items-start">
                 <span className="text-sm font-bold">Observación:</span>
                 <span className="text-sm text-start">{item.obs}</span>
+              </div>
+              <div className="flex pt-3 w-full justify-around">
+                <img src={editIcon} height={25} width={25} />
+                <img src={infoIcon} height={25} width={25} />
               </div>
             </div>
           )}
