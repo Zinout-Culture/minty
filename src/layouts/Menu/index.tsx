@@ -1,4 +1,4 @@
-import menuIcon from '../../assets/menu.svg'
+import Drawer from '../Drawer'
 
 const Menu = () => {
   return (
@@ -9,7 +9,7 @@ const Menu = () => {
 
       <div className="flex items-center gap-4">
         <span>Hola, Fernando</span>
-        <img src={menuIcon} className="text-white" width={40} height={40} />
+        <Drawer />
       </div>
     </div>
   )
