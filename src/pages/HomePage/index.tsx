@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+import Modal from '../../components/Modal'
+
 import Functions from '../../helpers/functions'
 
 import userIcon from '../../assets/user.svg'
@@ -21,10 +23,16 @@ interface IData {
 
 const HomePage = () => {
   const [data, setData] = useState<IData[]>([])
+  const [isOpen, setOpen] = useState<boolean>(false)
 
   const handleToggle = (index: number): void => {
     data[index].isOpen = !data[index].isOpen
     setData([...data])
+  }
+
+  const handleModal = (index: number) => {
+    console.info(data[index])
+    setOpen(true)
   }
 
   useEffect(() => {
@@ -72,13 +80,17 @@ const HomePage = () => {
                 <span className="text-sm text-start">{item.obs}</span>
               </div>
               <div className="flex pt-3 w-full justify-around">
-                <img src={editIcon} height={25} width={25} />
-                <img src={infoIcon} height={25} width={25} />
+                <img src={editIcon} height={25} width={25} onClick={() => handleModal(index)} />
+                <img src={infoIcon} height={25} width={25} onClick={() => handleModal(index)} />
               </div>
             </div>
           )}
         </div>
       ))}
+
+      <Modal isOpen={isOpen} onClose={() => setOpen(false)}>
+        <span>esto es un modal</span>
+      </Modal>
     </div>
   )
 }
